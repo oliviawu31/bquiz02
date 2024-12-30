@@ -2,7 +2,7 @@
     <legend>會員登入</legend>
     <table>
         <tr>
-            <td>帳號管理</td>
+            <td>帳號</td>
             <td><input type="text" name="acc" id="acc"></td>
         </tr>
         <tr>
