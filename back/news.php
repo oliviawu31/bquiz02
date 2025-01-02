@@ -9,17 +9,24 @@
             <th>刪除</th>
         </tr>
         <?php
+          // 確定總共有多少條新聞資料
         $total=$News->count();
+        // 每頁顯示的新聞數量
         $div=3;
+        // 計算總頁數，四捨五入後得到
         $pages=ceil($total/$div);
+        // 取得目前頁數，若沒有指定則預設為第 1 頁
         $now=$_GET['p']??1;
+        // 計算起始的資料索引，基於目前頁數
         $start=($now-1)*$div;
+        // 根據當前頁數取得對應的新聞資料
         $rows=$News->all(" Limit $start,$div");
         foreach($rows as $idx=> $row):
 
         ?>
 
         <tr>
+            <!-- 顯示編號：起始索引加上目前的索引值再加1 -->
             <td><?=$start+$idx+1;?></td>
             <td><?=$row['title'];?></td>
             <td>
@@ -29,6 +36,8 @@
                 <input type="checkbox" name="del[]" value="<?=$row['id'];?>">
             </td>
         </tr>
+        <input type="hidden" name="id[]" value="<?=$row['id'];?>">
+
         <?php endforeach; ?>
     </table>
 
@@ -50,3 +59,27 @@
     </div>
 
 </fieldset>
+
+<script>
+function edit() {
+    /* let ids=$("input[name='id[]']")
+             .map((idx,item)=>{
+                return $(item).val()
+              }).get(); */
+    let ids = $("input[name='id[]']")
+        .map((idx, item) => $(item).val()).get();
+    let del = $("input[name='del[]']:checked")
+        .map((idx, item) => $(item).val()).get();
+    let sh = $("input[name='sh[]']:checked")
+        .map((idx, item) => $(item).val()).get();
+    $.post("./api/edit_news.php", {
+        ids,
+        sh,
+        del
+    }, (res) => {
+        //console.log(res);
+        location.reload();
+    })
+
+}
+</script>
