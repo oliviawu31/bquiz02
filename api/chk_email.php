@@ -8,3 +8,5 @@ if(!empty($user)){
     echo "查無此資料";
 
 }
+
+?>
