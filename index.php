@@ -49,8 +49,15 @@ include_once"api/db.php";
                         </marquee>
                     </div>
 
+                    <!-- ":" 代替 "{}" -->
                     <span style="width:23%; display:inline-block;">
+                        <?php if(!isset($_SESSION['user'])):?>
                         <a href="?do=login">會員登入</a>
+                        <?php else:?>
+                        歡迎,<?=$_SESSION['user'];?><br>
+                        <button onclick="location.href='admin.php'">管理</button>
+                        <button onclick="logout()">登出</button>
+                        <?php endif;?>
                     </span>
                 </div>
                 <?php
