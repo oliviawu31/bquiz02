@@ -1,3 +1,9 @@
+<style>
+.detail {
+    display: none;
+}
+</style>
+
 <fieldset>
     <legend>目前位置：首頁> 最新文章區</legend>
     <table style="width: 100%;">
@@ -27,9 +33,12 @@
 
         <tr>
             <!-- 顯示新聞標題 -->
-            <td><?=$row['title'];?></td>
+            <td class="row-title"><?=$row['title'];?></td>
             <!-- 顯示新聞內容的前 25 個字元，並加上省略號 -->
-            <td><?=mb_substr($row['news'],0,25);?>...</td>
+            <td>
+                <span class='title'><?=mb_substr($row['news'],0,25);?>...</span>
+                <span class='detail'><?=nl2br($row['news']);?></span>
+            </td>
             <td>
                 <?php
                 if (isset($_SESSION['user'])){
@@ -84,5 +93,10 @@ $(".like").on("click", function() {
                 break;
         }
     })
+})
+
+
+$(".row-title").on("click", function() {
+    $(this).next().children(".title,.detail").toggle();
 })
 </script>
