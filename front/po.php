@@ -46,4 +46,10 @@ function getList(type) {
         $("#postList").html(list)
     }) */
 }
+
+function getPost(id) {
+    $("#postList").load("./api/get_post.php", {
+        id
+    })
+}
 </script>
