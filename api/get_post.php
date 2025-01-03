@@ -1,7 +1,7 @@
 <?php include_once "db.php";
-$type=$_POST['type'];
-$rows=$News->all(['type'=>$type]);
+$id=$_POST['id'];
+$rows=$News->find($id);
+echo "<h3>{$row['title']}</h3>";
+echo nl2br($row['news']);
 
-foreach($rows as $row){
-    echo "<a href='' class='list-item'>{$row['title']}</a>";
-}
+?>
